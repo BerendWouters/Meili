@@ -1,3 +1,11 @@
-.split-content{
-    display: flex
+.split-content {
+  display: flex;
+  flex-direction: row;
+  height: 50vh;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
 }
