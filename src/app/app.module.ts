@@ -13,14 +13,10 @@ import { GpxPreviewComponent } from './gpx-preview/gpx-preview.component';
     AppComponent,
     MapComponent,
     GpxLoadComponent,
-    GpxPreviewComponent
+    GpxPreviewComponent,
   ],
-  imports: [
-    BrowserModule,
-    LeafletModule,
-    BrowserAnimationsModule
-  ],
+  imports: [BrowserModule, LeafletModule, BrowserAnimationsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

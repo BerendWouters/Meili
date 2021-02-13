@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'meili';
+
+  fileContent$ = new Subject<string>();
+  onFileRead($event: string) {
+    this.fileContent$.next($event);
+  }
 }

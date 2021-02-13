@@ -1,9 +1,12 @@
 <ng-container>
-  <meili-gpx-load></meili-gpx-load>
+  <meili-gpx-load (fileReadEvent)="onFileRead($event)"></meili-gpx-load>
 </ng-container>
 <ng-container>
   <div class="split-content">
-    <meili-gpx-preview class="column"></meili-gpx-preview>
+    <meili-gpx-preview
+      [fileContent]="fileContent$ | async"
+      class="column"
+    ></meili-gpx-preview>
     <meili-map class="column"></meili-map>
   </div>
 </ng-container>

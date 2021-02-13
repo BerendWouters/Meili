@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'meili-gpx-load',
@@ -6,7 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gpx-load.component.scss'],
 })
 export class GpxLoadComponent implements OnInit {
+  @Output() fileReadEvent = new EventEmitter<string>();
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  onChange($event: Event) {
+    const eventTarget = $event.target as HTMLInputElement;
+    console.log(eventTarget.files);
+    const fileReader = new FileReader();
+    const file = eventTarget.files?.item(0);
+    if (file) {
+      fileReader.onload = (e) => {
+        const text = fileReader.result?.toString().trim();
+        this.fileReadEvent.emit(text);
+      };
+      fileReader.readAsText(file);
+    }
+  }
 }
