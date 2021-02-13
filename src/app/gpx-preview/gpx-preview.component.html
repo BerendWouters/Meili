@@ -1,1 +1,36 @@
-<p *ngIf="fileContent">{{ fileContent }}</p>
+<ng-container *ngIf="gpx">
+  <mat-card *ngIf="gpx.metadata">
+    <mat-card-title>Metadata</mat-card-title>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item> Creator: {{ gpx.metadata.creator }} </mat-list-item>
+        <mat-list-item> Name: {{ gpx.metadata.name }} </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+  <mat-accordion>
+    <mat-expansion-panel *ngIf="gpx.waypoints"></mat-expansion-panel>
+
+    <mat-expansion-panel *ngIf="gpx.tracks">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Tracks </mat-panel-title>
+        <mat-panel-description>
+          Tracks element in the GPX file
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-expansion-panel *ngFor="let track of gpx.tracks">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ track.name }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-panel-description>
+          Track with {{ track.segments.length }} segments
+        </mat-panel-description>
+        <mat-list>
+          <mat-list-item *ngFor="let trackPoint of track.trackpoints"
+            >lat: {{ trackPoint.lat }}, lon: {{ trackPoint.lon }}
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-container>

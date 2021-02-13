@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
 
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
@@ -15,7 +18,14 @@ import { GpxPreviewComponent } from './gpx-preview/gpx-preview.component';
     GpxLoadComponent,
     GpxPreviewComponent,
   ],
-  imports: [BrowserModule, LeafletModule, BrowserAnimationsModule],
+  imports: [
+    BrowserModule,
+    LeafletModule,
+    BrowserAnimationsModule,
+    MatExpansionModule,
+    MatCardModule,
+    MatListModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
