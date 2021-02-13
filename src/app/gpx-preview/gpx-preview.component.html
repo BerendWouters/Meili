@@ -23,13 +23,15 @@
           <mat-panel-title>{{ track.name }}</mat-panel-title>
         </mat-expansion-panel-header>
         <mat-panel-description>
-          Track with {{ track.segments.length }} segments
+          Track with {{ track.segments[0] }} segments
         </mat-panel-description>
-        <mat-list>
-          <mat-list-item *ngFor="let trackPoint of track.trackpoints"
+        <mat-selection-list (selectionChange)="onSelectionChanged($event)">
+          <mat-list-option
+            *ngFor="let trackPoint of track.trackpoints"
+            [value]="trackPoint"
             >lat: {{ trackPoint.lat }}, lon: {{ trackPoint.lon }}
-          </mat-list-item>
-        </mat-list>
+          </mat-list-option>
+        </mat-selection-list>
       </mat-expansion-panel>
     </mat-expansion-panel>
   </mat-accordion>

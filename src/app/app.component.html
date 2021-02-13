@@ -4,9 +4,10 @@
 <ng-container>
   <div class="split-content">
     <meili-gpx-preview
+      (trackpointsSelected)="onTrackpointsSelected($event)"
       [fileContent]="fileContent$ | async"
       class="column"
     ></meili-gpx-preview>
-    <meili-map class="column"></meili-map>
+    <meili-map class="column" [trackpoints]="trackpoints$ | async"></meili-map>
   </div>
 </ng-container>

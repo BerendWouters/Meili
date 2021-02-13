@@ -1,5 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Gpx, parseGpx } from 'practical-gpx-to-js';
+import {
+  Component,
+  ComponentFactoryResolver,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { MatSelectionListChange } from '@angular/material/list';
+import { Gpx, GpxTrackpoint, parseGpx } from 'practical-gpx-to-js';
 
 @Component({
   selector: 'meili-gpx-preview',
@@ -16,9 +24,18 @@ export class GpxPreviewComponent implements OnInit {
     }
   }
 
+  @Output() trackpointsSelected = new EventEmitter<GpxTrackpoint[]>();
+
   gpx: Gpx | null = null;
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  onSelectionChanged($event: MatSelectionListChange) {
+    const selectedTrackpoints = $event.source.selectedOptions.selected.map(
+      (x) => x.value
+    ) as GpxTrackpoint[];
+    this.trackpointsSelected.emit(selectedTrackpoints);
+  }
 }
