@@ -4,19 +4,20 @@ import { tileLayer, latLng } from 'leaflet';
 @Component({
   selector: 'meili-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.sass']
+  styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
   options = {
     layers: [
-      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '...',
+      }),
     ],
     zoom: 5,
-    center: latLng(46.879966, -121.726909)
+    center: latLng(46.879966, -121.726909),
   };
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
