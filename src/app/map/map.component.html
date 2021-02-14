@@ -1,4 +1,5 @@
 <div
+  #map
   class="map-wrapper"
   leaflet
   [leafletOptions]="options"
@@ -6,3 +7,8 @@
   [leafletZoom]="14"
   [leafletLayers]="layers"
 ></div>
+<button mat-flat-button color="primary" (click)="onGenerateImage()">
+  Generate image
+</button>
+
+<a #downloadLink></a>

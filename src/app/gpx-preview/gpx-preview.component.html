@@ -25,7 +25,10 @@
         <mat-panel-description>
           Track with {{ track.segments[0] }} segments
         </mat-panel-description>
-        <mat-selection-list (selectionChange)="onSelectionChanged($event)">
+        <mat-selection-list
+          (selectionChange)="onSelectionChanged($event)"
+          color="primary"
+        >
           <mat-list-option
             *ngFor="let trackPoint of track.trackpoints"
             [value]="trackPoint"

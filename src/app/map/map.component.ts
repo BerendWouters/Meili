@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import html2canvas from 'html2canvas';
 import {
   tileLayer,
   latLng,
@@ -21,6 +22,9 @@ export class MapComponent implements OnInit {
 
   layers: Polyline[] = [];
 
+  @ViewChild('map') map: ElementRef | null = null;
+  @ViewChild('downloadLink') downloadLink: ElementRef | null = null;
+
   @Input() set trackpoints(values: GpxTrackpoint[] | null) {
     if (values && values.length > 0) {
       this.center = latLng(values[0].lat, values[0].lon);
@@ -40,10 +44,27 @@ export class MapComponent implements OnInit {
         attribution: '...',
       }),
     ],
+    preferCanvas: true,
     zoom: 5,
     center: latLng(46.879966, -121.726909),
   };
   constructor() {}
 
   ngOnInit(): void {}
+  onGenerateImage() {
+    if (this.map && this.downloadLink) {
+      html2canvas(this.map.nativeElement, {
+        allowTaint: true,
+        useCORS: true,
+      }).then((canvas) => {
+        canvas.toBlob(function (blob) {
+          // To download directly on browser default 'downloads' location
+          let link = document.createElement('a');
+          link.download = 'image.png';
+          link.href = URL.createObjectURL(blob);
+          link.click();
+        }, 'image/png');
+      });
+    }
+  }
 }
