@@ -1,13 +1,28 @@
 <ng-container>
   <meili-gpx-load (fileReadEvent)="onFileRead($event)"></meili-gpx-load>
 </ng-container>
-<ng-container>
+<ng-container *ngIf="fileContent$ | async as fileContent; else infoTemplate">
   <div class="split-content">
     <meili-gpx-preview
       (trackpointsSelected)="onTrackpointsSelected($event)"
-      [fileContent]="fileContent$ | async"
+      [fileContent]="fileContent"
       class="column"
     ></meili-gpx-preview>
     <meili-map class="column" [trackpoints]="trackpoints$ | async"></meili-map>
   </div>
 </ng-container>
+<ng-template #infoTemplate>
+  <h1>Meili</h1>
+  <p>Meili is a GPX file visualizer</p>
+  <h2>Features</h2>
+  <ul>
+    <li>Upload .gpx file to the app (but it remains on your computer)</li>
+    <li>Parses uploaded .gpx file</li>
+    <li>Maps .gpx file contents into a dynamic list</li>
+    <ul>
+      <li>
+        Only the metadata and trackpoint properties of a .gpx file are supported
+      </li>
+    </ul>
+  </ul>
+</ng-template>

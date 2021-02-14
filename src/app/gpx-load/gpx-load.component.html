@@ -1,1 +1,13 @@
-<input type="file" accept=".gpx" (change)="onChange($event)" />
+<div class="header">
+  <button mat-raised-button color="primary" (click)="fileUpload.click()">
+    Upload a .gpx file
+  </button>
+</div>
+
+<input
+  type="file"
+  #fileUpload
+  hidden
+  accept=".gpx"
+  (change)="onChange($event)"
+/>
