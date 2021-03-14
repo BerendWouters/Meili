@@ -3,12 +3,10 @@
 </ng-container>
 <ng-container *ngIf="fileContent$ | async as fileContent; else infoTemplate">
   <div class="split-content">
-    <meili-gpx-preview
-      (trackpointsSelected)="onTrackpointsSelected($event)"
-      [fileContent]="fileContent"
-      class="column"
-    ></meili-gpx-preview>
-    <meili-map class="column" [trackpoints]="trackpoints$ | async"></meili-map>
+    <meili-gpx-preview class="gps-container" (trackpointsSelected)="onTrackpointsSelected($event)"
+      [fileContent]="fileContent">
+    </meili-gpx-preview>
+    <meili-map class="map-container" [trackpoints]="trackpoints$ | async"></meili-map>
   </div>
 </ng-container>
 <ng-template #infoTemplate>

@@ -1,11 +1,21 @@
 .split-content {
-  display: flex;
-  flex-direction: row;
-  height: 50vh;
+  display: grid;
+  height: 80vh;
+  grid-template-columns: 1fr 1fr;
+}
+.gps-container{
+  overflow: auto;
+  
+}
+.map-container{
+  padding-left: 16px
 }
 .column {
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
   flex: 1;
+}
+.map{
+  position: sticky;
 }
