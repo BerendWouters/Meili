@@ -8,6 +8,7 @@
       </mat-list>
     </mat-card-content>
   </mat-card>
+
   <mat-accordion>
     <mat-expansion-panel *ngIf="gpx.waypoints"></mat-expansion-panel>
 
@@ -18,24 +19,23 @@
           Tracks element in the GPX file
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <mat-expansion-panel *ngFor="let track of gpx.tracks">
-        <mat-expansion-panel-header>
-          <mat-panel-title>{{ track.name }}</mat-panel-title>
-        </mat-expansion-panel-header>
-        <mat-panel-description>
-          Track with {{ track.segments[0] }} segments
-        </mat-panel-description>
-        <mat-selection-list
-          (selectionChange)="onSelectionChanged($event)"
-          color="primary"
-        >
-          <mat-list-option
-            *ngFor="let trackPoint of track.trackpoints"
-            [value]="trackPoint"
-            >lat: {{ trackPoint.lat }}, lon: {{ trackPoint.lon }}
-          </mat-list-option>
-        </mat-selection-list>
-      </mat-expansion-panel>
+      <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
+        <ng-container *cdkVirtualFor="let track of gpx.tracks">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{ track.name }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-panel-description>
+              Track with {{ track.segments[0] }} segments
+            </mat-panel-description>
+            <mat-selection-list (selectionChange)="onSelectionChanged($event)" color="primary">
+              <mat-list-option *ngFor="let trackPoint of track.trackpoints" [value]="trackPoint">lat: {{ trackPoint.lat
+                }}, lon: {{ trackPoint.lon }}
+              </mat-list-option>
+            </mat-selection-list>
+          </mat-expansion-panel>
+        </ng-container>
+      </cdk-virtual-scroll-viewport>
     </mat-expansion-panel>
   </mat-accordion>
 </ng-container>

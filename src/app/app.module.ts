@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
@@ -29,8 +30,9 @@ import { GpxPreviewComponent } from './gpx-preview/gpx-preview.component';
     MatListModule,
     MatButtonModule,
     MatIconModule,
+    ScrollingModule
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
