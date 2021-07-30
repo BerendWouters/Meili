@@ -2,6 +2,7 @@
   #map
   class="map-wrapper"
   leaflet
+  *ngIf="center"
   [leafletOptions]="options"
   [(leafletCenter)]="center"
   [leafletZoom]="14"
