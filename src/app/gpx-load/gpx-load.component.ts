@@ -15,11 +15,10 @@ export class GpxLoadComponent implements OnInit {
 
   onChange($event: Event) {
     const eventTarget = $event.target as HTMLInputElement;
-    console.log(eventTarget.files);
     const fileReader = new FileReader();
     const file = eventTarget.files?.item(0);
     if (file) {
-      fileReader.onload = (e) => {
+      fileReader.onload = () => {
         const text = fileReader.result?.toString().trim();
         this.fileReadEvent.emit(text);
       };

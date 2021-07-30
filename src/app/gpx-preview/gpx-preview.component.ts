@@ -19,7 +19,9 @@ export class GpxPreviewComponent implements OnInit {
     if (value) {
       parseGpx(value).then((gpx) => {
         this.gpx = gpx;
-        console.log(this.gpx);
+
+        const firstTrackpoint = gpx.tracks![0].trackpoints[0];
+        this.trackpointsSelected.next([firstTrackpoint]);
       });
     }
   }
