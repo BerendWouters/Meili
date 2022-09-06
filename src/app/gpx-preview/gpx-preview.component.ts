@@ -7,7 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { MatSelectionListChange } from '@angular/material/list';
-import { Gpx, GpxTrackpoint, parseGpx } from 'practical-gpx-to-js';
+import { Gpx, GpxTrackpoint, GpxTrack, parseGpx } from 'practical-gpx-to-js';
 
 @Component({
   selector: 'meili-gpx-preview',
@@ -28,6 +28,8 @@ export class GpxPreviewComponent implements OnInit {
 
   @Output() trackpointsSelected = new EventEmitter<GpxTrackpoint[]>();
 
+  private _selectedTrackpoints: GpxTrackpoint[] = [];
+
   gpx: Gpx | null = null;
 
   constructor() {}
@@ -38,6 +40,19 @@ export class GpxPreviewComponent implements OnInit {
     const selectedTrackpoints = $event.source.selectedOptions.selected.map(
       (x) => x.value
     ) as GpxTrackpoint[];
+    this._selectedTrackpoints = selectedTrackpoints;
     this.trackpointsSelected.emit(selectedTrackpoints);
+  }
+
+  markEveryNthElement(trackIndex: number, skip: number) {
+    const gpx = this.gpx as Gpx;
+    if (gpx && gpx.tracks) {
+      const track = gpx.tracks[trackIndex] as GpxTrack;
+      const selectedTrackpoints = track.trackpoints.filter(
+        (_el: GpxTrackpoint, index: number) => index >= skip
+      );
+      this._selectedTrackpoints = selectedTrackpoints;
+      this.trackpointsSelected.emit(selectedTrackpoints);
+    }
   }
 }
