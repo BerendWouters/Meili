@@ -131,6 +131,5 @@
     "@schematics/angular:component": {
       "styleext": "scss"
     }
-  },
-  "defaultProject": "meili"
+  }
 }
