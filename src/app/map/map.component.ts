@@ -56,15 +56,19 @@ export class MapComponent implements OnInit {
       html2canvas(this.map.nativeElement, {
         allowTaint: true,
         useCORS: true,
-      }).then((canvas) => {
-        canvas.toBlob(function (blob) {
-          // To download directly on browser default 'downloads' location
-          let link = document.createElement('a');
-          link.download = 'image.png';
-          link.href = URL.createObjectURL(blob);
-          link.click();
-        }, 'image/png');
-      });
+      }).then(
+        (canvas: {
+          toBlob: (arg0: (blob: any) => void, arg1: string) => void;
+        }) => {
+          canvas.toBlob(function (blob: Blob | MediaSource) {
+            // To download directly on browser default 'downloads' location
+            let link = document.createElement('a');
+            link.download = 'image.png';
+            link.href = URL.createObjectURL(blob);
+            link.click();
+          }, 'image/png');
+        }
+      );
     }
   }
 }
