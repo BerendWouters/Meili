@@ -12,7 +12,7 @@
   <mat-accordion>
     <mat-expansion-panel *ngIf="gpx.waypoints"></mat-expansion-panel>
 
-    <mat-expansion-panel *ngIf="gpx.tracks">
+    <mat-expansion-panel *ngIf="gpx.tracks" expanded="true">
       <mat-expansion-panel-header>
         <mat-panel-title> Tracks </mat-panel-title>
         <mat-panel-description>
@@ -20,17 +20,31 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
-        <ng-container *cdkVirtualFor="let track of gpx.tracks">
-          <mat-expansion-panel>
+        <ng-container *cdkVirtualFor="let track of gpx.tracks; let i = index">
+          <mat-expansion-panel [expanded]="i === 0">
             <mat-expansion-panel-header>
               <mat-panel-title>{{ track.name }}</mat-panel-title>
             </mat-expansion-panel-header>
             <mat-panel-description>
-              Track with {{ track.segments[0] }} segments
+              <div class="segment-selector">
+                <p>Track with {{ track.segments[0] }} segments</p>
+                <button
+                  mat-stroked-button
+                  color="primary"
+                  (click)="markEveryNthElement(i, 5)"
+                >
+                  Plot basic track
+                </button>
+              </div>
             </mat-panel-description>
-            <mat-selection-list (selectionChange)="onSelectionChanged($event)" color="primary">
-              <mat-list-option *ngFor="let trackPoint of track.trackpoints" [value]="trackPoint">lat: {{ trackPoint.lat
-                }}, lon: {{ trackPoint.lon }}
+            <mat-selection-list
+              (selectionChange)="onSelectionChanged($event)"
+              color="primary"
+            >
+              <mat-list-option
+                *ngFor="let trackPoint of track.trackpoints"
+                [value]="trackPoint"
+                >lat: {{ trackPoint.lat }}, lon: {{ trackPoint.lon }}
               </mat-list-option>
             </mat-selection-list>
           </mat-expansion-panel>

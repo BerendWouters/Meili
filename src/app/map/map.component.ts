@@ -27,7 +27,8 @@ export class MapComponent implements OnInit {
 
   @Input() set trackpoints(values: GpxTrackpoint[] | null) {
     if (values && values.length > 0) {
-      this.center = latLng(values[0].lat, values[0].lon);
+      const lastIndex = values.length - 1;
+      this.center = latLng(values[lastIndex].lat, values[lastIndex].lon);
       const sortedFollowingTime = values.sort(
         (a, b) => a.time!.getTime() - b.time!.getTime()
       );
