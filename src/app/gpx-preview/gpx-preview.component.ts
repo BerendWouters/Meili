@@ -49,7 +49,7 @@ export class GpxPreviewComponent implements OnInit {
     if (gpx && gpx.tracks) {
       const track = gpx.tracks[trackIndex] as GpxTrack;
       const selectedTrackpoints = track.trackpoints.filter(
-        (_el: GpxTrackpoint, index: number) => index >= skip
+        (_el: GpxTrackpoint, index: number) => index % skip === 0
       );
       this._selectedTrackpoints = selectedTrackpoints;
       this.trackpointsSelected.emit(selectedTrackpoints);
